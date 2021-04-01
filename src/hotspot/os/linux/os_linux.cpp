@@ -501,6 +501,10 @@ extern "C" void breakpoint() {
 
 void os::Linux::libpthread_init() {
   // Save glibc and pthread version strings.
+#ifdef __ANDROID__
+  os::Linux::set_libc_version("bionic - unknown");
+  os::Linux::set_libpthread_version("bionic - unknown");
+#else
 #if !defined(_CS_GNU_LIBC_VERSION) || \
     !defined(_CS_GNU_LIBPTHREAD_VERSION)
   #error "glibc too old (< 2.3.2)"
@@ -523,6 +527,7 @@ void os::Linux::libpthread_init() {
   str = (char *)malloc(n, mtInternal);
   confstr(_CS_GNU_LIBPTHREAD_VERSION, str, n);
   os::Linux::set_libpthread_version(str);
+#endif
 #endif
 }
 
