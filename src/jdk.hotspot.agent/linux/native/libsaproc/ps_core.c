@@ -184,6 +184,7 @@ static ps_prochandle_ops core_ops = {
 
 // read regs and create thread from NT_PRSTATUS entries from core file
 static bool core_handle_prstatus(struct ps_prochandle* ph, const char* buf, size_t nbytes) {
+#ifndef __ANDROID__
    // we have to read prstatus_t from buf
    // assert(nbytes == sizeof(prstaus_t), "size mismatch on prstatus_t");
    prstatus_t* prstat = (prstatus_t*) buf;
@@ -241,6 +242,7 @@ static bool core_handle_prstatus(struct ps_prochandle* ph, const char* buf, size
       print_debug("\tgs = 0x%lx\n", newthr->regs.gs);
 #endif
    }
+#endif
 
    return true;
 }
