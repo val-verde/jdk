@@ -202,7 +202,7 @@ int expandLogicalImmediate(uint32_t immN, uint32_t immr,
   tmask = 0xffffffffffffffffULL;
 
   for (int i = 0; i < 6; i++) {
-    int nbits = 1 << i;
+    uint64_t nbits = 1 << i;
     uint64_t and_bit = pickbit(tmask_and, i);
     uint64_t or_bit = pickbit(tmask_or, i);
     uint64_t and_bits_sub = replicate(and_bit, 1, nbits);
@@ -221,7 +221,7 @@ int expandLogicalImmediate(uint32_t immN, uint32_t immr,
   wmask = 0;
 
   for (int i = 0; i < 6; i++) {
-    int nbits = 1 << i;
+    uint64_t nbits = 1 << i;
     uint64_t and_bit = pickbit(wmask_and, i);
     uint64_t or_bit = pickbit(wmask_or, i);
     uint64_t and_bits_sub = replicate(and_bit, 1, nbits);
