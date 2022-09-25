@@ -82,7 +82,7 @@
 // so uses of functions that are both forbidden and fortified won't cause
 // forbidden warnings in such builds.
 #define FORBID_C_FUNCTION(signature, alternative) \
-  extern "C" __attribute__((__warning__(alternative))) signature;
+  extern "C" signature;
 
 // Disable warning attribute over the scope of the affected statement.
 // The name serves only to document the intended function.
