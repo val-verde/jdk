@@ -125,12 +125,6 @@ AC_DEFUN_ONCE([LIB_SETUP_FREETYPE],
     FREETYPE_TO_USE=system
   fi
 
-  if test "x$FREETYPE_TO_USE" = "xsystem" && \
-     (test "x$OPENJDK_TARGET_OS" = "xwindows" || \
-     test "x$OPENJDK_TARGET_OS" = "xmacosx"); then
-    AC_MSG_ERROR([Only bundled freetype can be specified on Mac and Windows])
-  fi
-
   if test "x$with_freetype_include" != "x" ; then
     POTENTIAL_FREETYPE_INCLUDE_PATH="$with_freetype_include"
   fi
