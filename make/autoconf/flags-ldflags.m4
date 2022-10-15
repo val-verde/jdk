@@ -73,9 +73,13 @@ AC_DEFUN([FLAGS_SETUP_LDFLAGS_HELPER],
     BASIC_LDFLAGS_JVM_ONLY="-Wl,-O1"
 
   elif test "x$TOOLCHAIN_TYPE" = xclang; then
-    BASIC_LDFLAGS_JVM_ONLY="-mno-omit-leaf-frame-pointer -mstack-alignment=16 \
-        -fPIC"
-
+    if test "x$OPENJDK_TARGET_OS" = xmacosx; then
+      BASIC_LDFLAGS_JVM_ONLY="-mno-omit-leaf-frame-pointer \
+          -fPIC"
+    else
+      BASIC_LDFLAGS_JVM_ONLY="-mno-omit-leaf-frame-pointer -mstack-alignment=16 \
+          -fPIC"
+    fi
   elif test "x$TOOLCHAIN_TYPE" = xxlc; then
     BASIC_LDFLAGS="-b64 -brtl -bnorwexec -bnolibpath -bnoexpall -bernotok -btextpsize:64K \
         -bdatapsize:64K -bstackpsize:64K"

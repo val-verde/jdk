@@ -502,7 +502,11 @@ AC_DEFUN([FLAGS_SETUP_CFLAGS_HELPER],
     # should agree with values of StackAlignmentInBytes in various
     # src/hotspot/cpu/*/globalDefinitions_*.hpp files, but this value currently
     # works for all platforms.
-    TOOLCHAIN_CFLAGS_JVM="$TOOLCHAIN_CFLAGS_JVM -mno-omit-leaf-frame-pointer -mstack-alignment=16"
+    if test "x$OPENJDK_TARGET_OS" = xmacosx; then
+      TOOLCHAIN_CFLAGS_JVM="$TOOLCHAIN_CFLAGS_JVM -mno-omit-leaf-frame-pointer"
+    else
+      TOOLCHAIN_CFLAGS_JVM="$TOOLCHAIN_CFLAGS_JVM -mno-omit-leaf-frame-pointer -mstack-alignment=16"
+    fi
 
     if test "x$OPENJDK_TARGET_OS" = xlinux; then
       if test "x$DEBUG_LEVEL" = xrelease; then
